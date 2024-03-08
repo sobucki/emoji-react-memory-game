@@ -10,6 +10,29 @@ export const Container = styled.button`
   background: none;
   cursor: pointer;
 
-  break-before: avoid; /* Evita que o elemento seja quebrado para a próxima linha */
+  break-before: avoid;
   break-after: auto;
+
+  font-size: 36px;
+
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease-in-out;
+
+  &:hover {
+    transform: rotateY(-180deg);
+  }
+
+  background-color: aliceblue;
+`;
+
+export const Back = styled.div`
+  backface-visibility: hidden;
+  position: absolute;
+  transform: rotateY(0deg);
+`;
+export const Front = styled.div`
+  backface-visibility: hidden;
+  position: absolute;
+  transform: rotateY(180deg);
 `;
