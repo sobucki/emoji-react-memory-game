@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-export const Container = styled.button`
+interface ContainerProps {
+  active: boolean;
+}
+
+export const Container = styled.button<ContainerProps>`
   border: 1px solid #000;
   height: 75px;
   width: 75px;
@@ -19,20 +23,24 @@ export const Container = styled.button`
   transform-style: preserve-3d;
   transition: transform 0.5s ease-in-out;
 
-  &:hover {
-    transform: rotateY(-180deg);
-  }
+  transform: ${(props) => (props.active ? "rotateY(-180deg)" : "none")};
 
   background-color: aliceblue;
-`;
 
-export const Back = styled.div`
-  backface-visibility: hidden;
-  position: absolute;
-  transform: rotateY(0deg);
-`;
-export const Front = styled.div`
-  backface-visibility: hidden;
-  position: absolute;
-  transform: rotateY(180deg);
+  .back,
+  .front {
+    backface-visibility: hidden;
+    position: absolute;
+    visibility: hidden;
+  }
+
+  .back {
+    transform: rotateY(0deg);
+    visibility: ${(props) => (props.active ? "hidden" : "visible")};
+  }
+
+  .front {
+    transform: rotateY(180deg);
+    visibility: ${(props) => (props.active ? "visible" : "hidden")};
+  }
 `;
