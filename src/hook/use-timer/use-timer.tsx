@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { UseTimerProps } from "./types";
+import { formatDigitalTime } from "../../util/formatter";
 
 function useTimer({ initialValue = 0 }: UseTimerProps) {
   const [seconds, setSeconds] = useState(initialValue);
@@ -12,7 +13,7 @@ function useTimer({ initialValue = 0 }: UseTimerProps) {
     return () => clearInterval(interval);
   }, []);
 
-  return { seconds };
+  return { seconds, formatted: formatDigitalTime(seconds) };
 }
 
 export default useTimer;

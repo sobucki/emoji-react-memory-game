@@ -1,8 +1,10 @@
 import { useMemo, useState } from "react";
 import { useGameProps } from "./types";
 import { duplicateUniqueList, shuffle } from "../../util/utils";
+import useTimer from "../use-timer";
 
 function useGame({ optionCards }: useGameProps) {
+  const { formatted: formattedTimer } = useTimer({ initialValue: 0 });
   const cards = useMemo(() => {
     const duplicatedCards = duplicateUniqueList(optionCards.slice(0, 10));
     return shuffle(duplicatedCards);
@@ -37,7 +39,7 @@ function useGame({ optionCards }: useGameProps) {
     }
   };
 
-  return { cards, onRevealCard, moves };
+  return { cards, onRevealCard, moves, time: formattedTimer };
 }
 
 export default useGame;

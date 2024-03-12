@@ -17,6 +17,7 @@ describe("useTimer hook", () => {
     const { result, unmount } = renderHook(() => useTimer({ initialValue }));
 
     expect(result.current.seconds).toBe(initialValue);
+    expect(result.current.formatted).toBe("00:10");
     unmount();
   });
 
@@ -27,12 +28,14 @@ describe("useTimer hook", () => {
       vi.advanceTimersByTime(1000);
     });
     expect(result.current.seconds).toBe(1);
+    expect(result.current.formatted).toBe("00:01");
 
     act(() => {
       vi.advanceTimersByTime(2000);
     });
 
     expect(result.current.seconds).toBe(3);
+    expect(result.current.formatted).toBe("00:03");
     unmount();
   });
 
@@ -42,5 +45,6 @@ describe("useTimer hook", () => {
     vi.advanceTimersByTime(1000);
 
     expect(result.current.seconds).toBe(0);
+    expect(result.current.formatted).toBe("00:00");
   });
 });

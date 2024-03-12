@@ -4,12 +4,12 @@ import emojis from "../../assets/faces.json";
 import useGame from "../../hook/use-game";
 
 function Game() {
-  const { cards, onRevealCard, moves } = useGame({ optionCards: emojis });
+  const { cards, onRevealCard, moves, time } = useGame({ optionCards: emojis });
 
   return (
     <>
       <Header>
-        <div>time</div>
+        <div>time: {time}</div>
         <div>moves: {moves}</div>
         <div>time</div>
       </Header>

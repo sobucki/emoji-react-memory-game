@@ -1,6 +1,14 @@
 import { act, renderHook } from "@testing-library/react";
 import useGame from "..";
 
+vi.mock("../../use-timer", () => ({
+  __esModule: true,
+  default: vi.fn(() => ({
+    seconds: 0,
+    formatted: "00:00:00",
+  })),
+}));
+
 describe("use-game", () => {
   beforeEach(() => {
     // tell vitest we use mocked time
@@ -23,7 +31,16 @@ describe("use-game", () => {
   });
 
   describe("onReveal", () => {
-    it("should call callback with false when card not match", () => {
+    beforeEach(() => {
+      // tell vitest we use mocked time
+      vi.useFakeTimers();
+    });
+
+    afterEach(() => {
+      // restoring date after each test run
+      vi.useRealTimers();
+    });
+    it("should call callback with false when card not match", async () => {
       const { result } = renderHook(() => useGame({ optionCards: ["a", "b"] }));
 
       const callback1 = vitest.fn();
@@ -37,7 +54,10 @@ describe("use-game", () => {
         result.current.onRevealCard("b", callback2);
       });
 
-      vi.runAllTimers();
+      await vi.runAllTimersAsync();
+      // await act(async () => {
+      // result.current.onRevealCard("a", callback1);
+      // });
 
       expect(callback1).toBeCalledWith(false);
       expect(callback2).toBeCalledWith(false);
