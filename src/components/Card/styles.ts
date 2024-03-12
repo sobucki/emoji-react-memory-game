@@ -27,6 +27,10 @@ export const Container = styled.button<ContainerProps>`
 
   background-color: aliceblue;
 
+  &:disabled {
+    cursor: unset;
+  }
+
   .back,
   .front {
     backface-visibility: hidden;
