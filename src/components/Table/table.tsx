@@ -1,14 +1,16 @@
 import Card from "../Card";
 import { Container } from "./styles";
 import emojis from "../../assets/faces.json";
-import { duplicateUniqueList, shuffle } from "../../util/utils";
-import { useMemo, useState } from "react";
+// import { duplicateUniqueList, shuffle } from "../../util/utils";
+import { useState } from "react";
+import useGame from "../../hook/use-game";
 
 function Table() {
-  const shuffledList = useMemo(() => {
-    const duplicatedCards = duplicateUniqueList(emojis.slice(0, 10));
-    return shuffle(duplicatedCards);
-  }, []);
+  const { cards } = useGame({ optionCards: emojis });
+  // const shuffledList = useMemo(() => {
+  //   const duplicatedCards = duplicateUniqueList(emojis.slice(0, 10));
+  //   return shuffle(duplicatedCards);
+  // }, []);
 
   const [revealedCard, setRevealedCard] = useState<{
     value: string;
@@ -39,7 +41,7 @@ function Table() {
 
   return (
     <Container>
-      {shuffledList.map((emoji, index) => (
+      {cards.map((emoji, index) => (
         <Card key={index} value={emoji} onClick={onRevealCard} />
       ))}
     </Container>
