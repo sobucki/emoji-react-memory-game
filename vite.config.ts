@@ -7,5 +7,16 @@ export default defineConfig({
     environment: "jsdom",
     globals: true,
     setupFiles: "./setup-tests.js",
+    coverage: {
+      provider: "v8",
+      exclude: [
+        "**/types.ts",
+        "**/*.d.ts",
+        "**/__tests__/**",
+        "**/node_modules/**",
+        "**/.eslintrc.cjs",
+        "src/main.tsx",
+      ],
+    },
   },
 });

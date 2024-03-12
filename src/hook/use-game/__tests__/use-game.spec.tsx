@@ -63,4 +63,44 @@ describe("use-game", () => {
       expect(callback2).toBeCalledWith(true);
     });
   });
+
+  describe("counter moves", () => {
+    it("should moves stars with zero", () => {
+      const { result } = renderHook(() => useGame({ optionCards: ["a", "b"] }));
+
+      expect(result.current.moves).toEqual(0);
+    });
+
+    it("should incremente when reveal a matched pair of cards", () => {
+      const { result } = renderHook(() => useGame({ optionCards: ["a", "b"] }));
+
+      act(() => {
+        result.current.onRevealCard("a", vitest.fn());
+      });
+
+      act(() => {
+        result.current.onRevealCard("a", vitest.fn());
+      });
+
+      vi.runAllTimers();
+
+      expect(result.current.moves).toEqual(1);
+    });
+
+    it("should incremente when reveal a different pair of cards", () => {
+      const { result } = renderHook(() => useGame({ optionCards: ["a", "b"] }));
+
+      act(() => {
+        result.current.onRevealCard("a", vitest.fn());
+      });
+
+      act(() => {
+        result.current.onRevealCard("b", vitest.fn());
+      });
+
+      vi.runAllTimers();
+
+      expect(result.current.moves).toEqual(1);
+    });
+  });
 });

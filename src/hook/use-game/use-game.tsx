@@ -8,6 +8,8 @@ function useGame({ optionCards }: useGameProps) {
     return shuffle(duplicatedCards);
   }, [optionCards]);
 
+  const [moves, setMoves] = useState(0);
+
   const [selectedCard, setSelectedCard] = useState<{
     value: string;
     setMatchedCard: (value: boolean) => void;
@@ -21,11 +23,13 @@ function useGame({ optionCards }: useGameProps) {
       if (value === selectedCard.value) {
         setMatchedCard(true);
         selectedCard.setMatchedCard(true);
+        setMoves((current) => current + 1);
       } else {
         setTimeout(() => {
           setMatchedCard(false);
           selectedCard.setMatchedCard(false);
         }, 1000);
+        setMoves((current) => current + 1);
       }
       setSelectedCard(null);
     } else {
@@ -33,7 +37,7 @@ function useGame({ optionCards }: useGameProps) {
     }
   };
 
-  return { cards, onRevealCard };
+  return { cards, onRevealCard, moves };
 }
 
 export default useGame;

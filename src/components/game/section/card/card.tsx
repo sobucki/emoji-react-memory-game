@@ -22,6 +22,7 @@ function Card({ value, onClick: onTest }: CardProps) {
         onTest(value, setRevealed);
       }}
       disabled={isMatched}
+      data-testid="card-container"
     >
       <div className="back" data-testid="back">
         ?
