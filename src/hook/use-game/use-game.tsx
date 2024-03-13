@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useGameProps } from "./types";
 import { duplicateUniqueList, shuffle } from "../../util/utils";
 import useTimer from "../use-timer";
@@ -9,6 +9,8 @@ function useGame({ optionCards }: useGameProps) {
     const duplicatedCards = duplicateUniqueList(optionCards.slice(0, 10));
     return shuffle(duplicatedCards);
   }, [optionCards]);
+  const [counterMatches, setCounterMatches] = useState(0);
+  const [isVictory, setIsVictory] = useState(false);
 
   const [moves, setMoves] = useState(0);
 
@@ -26,6 +28,7 @@ function useGame({ optionCards }: useGameProps) {
         setMatchedCard(true);
         selectedCard.setMatchedCard(true);
         setMoves((current) => current + 1);
+        setCounterMatches((current) => current + 1);
       } else {
         setTimeout(() => {
           setMatchedCard(false);
@@ -39,7 +42,11 @@ function useGame({ optionCards }: useGameProps) {
     }
   };
 
-  return { cards, onRevealCard, moves, time: formattedTimer };
+  useEffect(() => {
+    if (counterMatches === cards.length / 2) setIsVictory(true);
+  }, [counterMatches, cards]);
+
+  return { cards, onRevealCard, moves, time: formattedTimer, win: isVictory };
 }
 
 export default useGame;

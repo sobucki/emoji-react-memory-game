@@ -123,4 +123,60 @@ describe("use-game", () => {
       expect(result.current.moves).toEqual(1);
     });
   });
+
+  describe("Rules", () => {
+    describe("Win game", () => {
+      it("should set win false when not match all cards of table", () => {
+        const { result } = renderHook(() =>
+          useGame({ optionCards: ["a", "b"] })
+        );
+
+        expect(result.current.win).toEqual(false);
+
+        act(() => {
+          result.current.onRevealCard("a", vitest.fn());
+        });
+
+        act(() => {
+          result.current.onRevealCard("b", vitest.fn());
+        });
+
+        vi.runAllTimers();
+
+        expect(result.current.win).toEqual(false);
+      });
+
+      it("should set win true when match all cards of table", () => {
+        const { result } = renderHook(() =>
+          useGame({ optionCards: ["a", "b"] })
+        );
+
+        expect(result.current.win).toEqual(false);
+
+        act(() => {
+          result.current.onRevealCard("a", vitest.fn());
+        });
+
+        act(() => {
+          result.current.onRevealCard("a", vitest.fn());
+        });
+
+        vi.runAllTimers();
+
+        expect(result.current.win).toEqual(false);
+
+        act(() => {
+          result.current.onRevealCard("b", vitest.fn());
+        });
+
+        act(() => {
+          result.current.onRevealCard("b", vitest.fn());
+        });
+
+        vi.runAllTimers();
+
+        expect(result.current.win).toEqual(true);
+      });
+    });
+  });
 });
