@@ -1,11 +1,14 @@
 import { act, renderHook } from "@testing-library/react";
 import useGame from "..";
 
+const pauseMock = vi.fn();
+
 vi.mock("../../use-timer", () => ({
   __esModule: true,
   default: vi.fn(() => ({
     seconds: 0,
     formatted: "00:00:00",
+    pause: pauseMock,
   })),
 }));
 
@@ -176,6 +179,24 @@ describe("use-game", () => {
         vi.runAllTimers();
 
         expect(result.current.win).toEqual(true);
+      });
+
+      it("should pause timer when win the game", () => {
+        const { result } = renderHook(() => useGame({ optionCards: ["a"] }));
+
+        expect(result.current.win).toEqual(false);
+
+        act(() => {
+          result.current.onRevealCard("a", vitest.fn());
+        });
+
+        act(() => {
+          result.current.onRevealCard("a", vitest.fn());
+        });
+
+        vi.runAllTimers();
+
+        expect(pauseMock).toBeCalled();
       });
     });
   });
