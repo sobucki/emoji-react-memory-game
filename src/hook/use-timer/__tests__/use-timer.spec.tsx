@@ -47,4 +47,64 @@ describe("useTimer hook", () => {
     expect(result.current.seconds).toBe(0);
     expect(result.current.formatted).toBe("00:00");
   });
+
+  it("should can pause the timer", () => {
+    const { result, unmount } = renderHook(() => useTimer({}));
+
+    expect(result.current.pause).toEqual(expect.any(Function));
+
+    act(() => {
+      vi.advanceTimersByTime(1000);
+    });
+    expect(result.current.seconds).toBe(1);
+    expect(result.current.formatted).toBe("00:01");
+
+    act(() => {
+      result.current.pause();
+    });
+
+    act(() => {
+      vi.advanceTimersByTime(2000);
+    });
+
+    expect(result.current.seconds).toBe(1);
+    expect(result.current.formatted).toBe("00:01");
+    unmount();
+  });
+
+  it("should can pause and resume the timer", () => {
+    const { result, unmount } = renderHook(() => useTimer({}));
+
+    expect(result.current.pause).toEqual(expect.any(Function));
+
+    act(() => {
+      vi.advanceTimersByTime(1000);
+    });
+    expect(result.current.seconds).toBe(1);
+    expect(result.current.formatted).toBe("00:01");
+
+    act(() => {
+      result.current.pause();
+    });
+
+    act(() => {
+      vi.advanceTimersByTime(2000);
+    });
+
+    expect(result.current.seconds).toBe(1);
+    expect(result.current.formatted).toBe("00:01");
+
+    act(() => {
+      result.current.resume();
+    });
+
+    act(() => {
+      vi.advanceTimersByTime(2000);
+    });
+
+    expect(result.current.seconds).toBe(3);
+    expect(result.current.formatted).toBe("00:03");
+
+    unmount();
+  });
 });
