@@ -1,29 +1,39 @@
-import { useEffect, useState } from "react";
-import { UseTimerProps } from "./types";
+import { useEffect, useReducer } from "react";
+import { TimerReducerState, UseTimerProps } from "./types";
 import { formatDigitalTime } from "../../util/formatter";
+import timerReducer from "./timer-reducer";
 
-function useTimer({ initialValue = 0 }: UseTimerProps) {
-  const [seconds, setSeconds] = useState(initialValue);
-  const [paused, setPaused] = useState(false);
+function useTimer({ initialValue = 0, status = "stopped" }: UseTimerProps) {
+  const initialState: TimerReducerState = {
+    seconds: initialValue,
+    status,
+  };
+
+  const [state, dispatch] = useReducer(timerReducer, initialState);
 
   useEffect(() => {
     let interval: number;
-    if (!paused) {
+    if (state.status === "running") {
       interval = setInterval(() => {
-        setSeconds((prevSeconds) => prevSeconds + 1);
+        dispatch({ type: "TICK" });
       }, 1000);
     }
     return () => clearInterval(interval);
-  }, [paused]);
+  }, [state.status]);
 
-  const pauseFunction = () => setPaused(true);
-  const resumeFunction = () => setPaused(false);
+  const start = () => dispatch({ type: "START" });
+  const pause = () => dispatch({ type: "PAUSE" });
+  const resume = () => dispatch({ type: "RESUME" });
+  const stop = () => dispatch({ type: "STOP" });
 
   return {
-    seconds,
-    formatted: formatDigitalTime(seconds),
-    pause: pauseFunction,
-    resume: resumeFunction,
+    seconds: state.seconds,
+    formatted: formatDigitalTime(state.seconds),
+    start,
+    pause,
+    resume,
+    stop,
+    status: state.status,
   };
 }
 
