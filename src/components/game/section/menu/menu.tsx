@@ -1,21 +1,30 @@
+import { FormEvent } from "react";
 import { Content, Overlay } from "./styles";
 import { MenuProps } from "./types";
 
-function Menu({ isOpen, onClose }: MenuProps) {
+function Menu({ isOpen, onSubmit }: MenuProps) {
   if (!isOpen) {
     return null;
   }
 
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.target as HTMLFormElement;
+    const category = form.elements.namedItem("categories") as HTMLSelectElement;
+    const level = form.elements.namedItem("levels") as HTMLSelectElement;
+    onSubmit({ category: category.value, level: level.value });
+  };
+
   return (
-    <Overlay onClick={onClose}>
+    <Overlay>
       <Content onClick={(e) => e.stopPropagation()}>
         <h2>Start a new game</h2>
         <fieldset>
           <legend>Configure how you want to play</legend>
-          <div>
+          <form onSubmit={handleSubmit}>
             <label htmlFor="category-select">Category:</label>
 
-            <select name="categories" id="category-select">
+            <select name="categories" id="category-select" required>
               <option value="">--Please choose an category--</option>
               <option value="activity_sports">Activity and Sports ⚽️🤸‍♂️</option>
               <option value="animals">Animals & Nature 🐶 🐱</option>
@@ -36,7 +45,7 @@ function Menu({ isOpen, onClose }: MenuProps) {
 
             <label htmlFor="level-select">Level:</label>
 
-            <select name="categories" id="level-select">
+            <select name="levels" id="level-select" required>
               <option value="">--Please choose an level--</option>
               <option value="very_easy">🤩 Very easy (5 emojis)</option>
               <option value="easy">🤗 Easy (8 emojis)</option>
@@ -46,8 +55,8 @@ function Menu({ isOpen, onClose }: MenuProps) {
               <option value="insane">😱 Insane (all available)</option>
             </select>
 
-            <button>Start</button>
-          </div>
+            <button type="submit">Start</button>
+          </form>
         </fieldset>
       </Content>
     </Overlay>

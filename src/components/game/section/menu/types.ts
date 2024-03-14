@@ -1,4 +1,9 @@
 export type MenuProps = {
   isOpen: boolean;
-  onClose: () => void;
+  onSubmit: (values: FormType) => void;
+};
+
+export type FormType = {
+  category: string;
+  level: string;
 };

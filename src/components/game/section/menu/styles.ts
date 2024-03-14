@@ -31,7 +31,7 @@ export const Content = styled.div`
       margin-bottom: 16px;
     }
 
-    > div {
+    > form {
       display: flex;
       flex-direction: column;
 

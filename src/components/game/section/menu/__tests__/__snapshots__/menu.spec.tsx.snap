@@ -1,12 +1,12 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`menu > should render correctly 1`] = `
+exports[`menu > Rendering > should render correctly 1`] = `
 <DocumentFragment>
   <div
     class="sc-beySPh geyGaj"
   >
     <div
-      class="sc-guDLey zOSuX"
+      class="sc-guDLey kqWEyS"
     >
       <h2>
         Start a new game
@@ -15,7 +15,7 @@ exports[`menu > should render correctly 1`] = `
         <legend>
           Configure how you want to play
         </legend>
-        <div>
+        <form>
           <label
             for="category-select"
           >
@@ -24,6 +24,7 @@ exports[`menu > should render correctly 1`] = `
           <select
             id="category-select"
             name="categories"
+            required=""
           >
             <option
               value=""
@@ -93,7 +94,8 @@ exports[`menu > should render correctly 1`] = `
           </label>
           <select
             id="level-select"
-            name="categories"
+            name="levels"
+            required=""
           >
             <option
               value=""
@@ -131,10 +133,12 @@ exports[`menu > should render correctly 1`] = `
               😱 Insane (all available)
             </option>
           </select>
-          <button>
+          <button
+            type="submit"
+          >
             Start
           </button>
-        </div>
+        </form>
       </fieldset>
     </div>
   </div>

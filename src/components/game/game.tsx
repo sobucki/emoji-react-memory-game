@@ -19,7 +19,7 @@ function Game() {
           <Card key={index} value={emoji} onClick={onRevealCard} />
         ))}
       </Table>
-      <Menu isOpen onClose={() => null} />
+      <Menu isOpen onSubmit={() => null} />
     </>
   );
 }
