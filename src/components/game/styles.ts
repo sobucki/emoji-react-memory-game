@@ -10,8 +10,6 @@ export const Table = styled.div`
   max-width: 900px;
   margin-left: auto;
   margin-right: auto;
-
-  background-color: aquamarine;
 `;
 export const Header = styled.section`
   width: 100%;

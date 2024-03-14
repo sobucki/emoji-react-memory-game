@@ -2,6 +2,7 @@ import Card from "./section/card";
 import { Header, Table } from "./styles";
 import emojis from "../../assets/faces.json";
 import useGame from "../../hook/use-game";
+import Menu from "./section/menu";
 
 function Game() {
   const { cards, onRevealCard, moves, time } = useGame({ optionCards: emojis });
@@ -18,6 +19,7 @@ function Game() {
           <Card key={index} value={emoji} onClick={onRevealCard} />
         ))}
       </Table>
+      <Menu isOpen onClose={() => null} />
     </>
   );
 }

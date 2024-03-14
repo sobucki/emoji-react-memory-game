@@ -16,12 +16,13 @@ function Card({ value, onClick: onTest }: CardProps) {
 
   return (
     <Container
-      active={isActive}
+      $active={isActive}
+      $matched={isMatched}
       onClick={() => {
         setIsActive(!isActive);
         onTest(value, setRevealed);
       }}
-      disabled={isMatched}
+      disabled={isMatched || isActive}
       data-testid="card-container"
     >
       <div className="back" data-testid="back">
