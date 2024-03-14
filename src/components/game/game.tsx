@@ -3,9 +3,17 @@ import { Header, Table } from "./styles";
 import emojis from "../../assets/faces.json";
 import useGame from "../../hook/use-game";
 import Menu from "./section/menu";
+import { FormType } from "./section/menu/types";
+import { useState } from "react";
 
 function Game() {
   const { cards, onRevealCard, moves, time } = useGame({ optionCards: emojis });
+  const [isOpenMenu, setIsOpenMenu] = useState(true);
+
+  const onStartMenu = (values: FormType) => {
+    console.log(values);
+    setIsOpenMenu(false);
+  };
 
   return (
     <>
@@ -19,7 +27,7 @@ function Game() {
           <Card key={index} value={emoji} onClick={onRevealCard} />
         ))}
       </Table>
-      <Menu isOpen onSubmit={() => null} />
+      <Menu isOpen={isOpenMenu} onSubmit={onStartMenu} />
     </>
   );
 }

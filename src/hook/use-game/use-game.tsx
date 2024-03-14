@@ -5,10 +5,6 @@ import useTimer from "../use-timer";
 
 function useGame({ optionCards }: useGameProps) {
   const { formatted: formattedTimer, pause } = useTimer({ initialValue: 0 });
-  const cards = useMemo(() => {
-    const duplicatedCards = duplicateUniqueList(optionCards.slice(0, 10));
-    return shuffle(duplicatedCards);
-  }, [optionCards]);
   const [counterMatches, setCounterMatches] = useState(0);
   const [isVictory, setIsVictory] = useState(false);
 
@@ -18,6 +14,11 @@ function useGame({ optionCards }: useGameProps) {
     value: string;
     setMatchedCard: (value: boolean) => void;
   } | null>(null);
+
+  const cards = useMemo(() => {
+    const duplicatedCards = duplicateUniqueList(optionCards.slice(0, 10));
+    return shuffle(duplicatedCards);
+  }, [optionCards]);
 
   const onRevealCard = (
     value: string,

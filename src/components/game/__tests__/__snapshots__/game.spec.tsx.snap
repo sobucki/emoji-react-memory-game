@@ -1,0 +1,503 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`game > rendering > should match snapshot 1`] = `
+<DocumentFragment>
+  <section
+    class="sc-dmyCSP fbZkES"
+  >
+    <div>
+      time: 00:00
+    </div>
+    <div>
+      moves: 0
+    </div>
+    <div>
+      time
+    </div>
+  </section>
+  <div
+    class="sc-guDLey iHIfwE"
+  >
+    <button
+      class="sc-beySPh gYIAsZ"
+      data-testid="card-container"
+    >
+      <div
+        class="back"
+        data-testid="back"
+      >
+        ?
+      </div>
+      <div
+        class="front"
+        data-testid="front"
+      >
+        ?
+      </div>
+    </button>
+    <button
+      class="sc-beySPh gYIAsZ"
+      data-testid="card-container"
+    >
+      <div
+        class="back"
+        data-testid="back"
+      >
+        ?
+      </div>
+      <div
+        class="front"
+        data-testid="front"
+      >
+        ?
+      </div>
+    </button>
+    <button
+      class="sc-beySPh gYIAsZ"
+      data-testid="card-container"
+    >
+      <div
+        class="back"
+        data-testid="back"
+      >
+        ?
+      </div>
+      <div
+        class="front"
+        data-testid="front"
+      >
+        ?
+      </div>
+    </button>
+    <button
+      class="sc-beySPh gYIAsZ"
+      data-testid="card-container"
+    >
+      <div
+        class="back"
+        data-testid="back"
+      >
+        ?
+      </div>
+      <div
+        class="front"
+        data-testid="front"
+      >
+        ?
+      </div>
+    </button>
+    <button
+      class="sc-beySPh gYIAsZ"
+      data-testid="card-container"
+    >
+      <div
+        class="back"
+        data-testid="back"
+      >
+        ?
+      </div>
+      <div
+        class="front"
+        data-testid="front"
+      >
+        ?
+      </div>
+    </button>
+    <button
+      class="sc-beySPh gYIAsZ"
+      data-testid="card-container"
+    >
+      <div
+        class="back"
+        data-testid="back"
+      >
+        ?
+      </div>
+      <div
+        class="front"
+        data-testid="front"
+      >
+        ?
+      </div>
+    </button>
+    <button
+      class="sc-beySPh gYIAsZ"
+      data-testid="card-container"
+    >
+      <div
+        class="back"
+        data-testid="back"
+      >
+        ?
+      </div>
+      <div
+        class="front"
+        data-testid="front"
+      >
+        ?
+      </div>
+    </button>
+    <button
+      class="sc-beySPh gYIAsZ"
+      data-testid="card-container"
+    >
+      <div
+        class="back"
+        data-testid="back"
+      >
+        ?
+      </div>
+      <div
+        class="front"
+        data-testid="front"
+      >
+        ?
+      </div>
+    </button>
+    <button
+      class="sc-beySPh gYIAsZ"
+      data-testid="card-container"
+    >
+      <div
+        class="back"
+        data-testid="back"
+      >
+        ?
+      </div>
+      <div
+        class="front"
+        data-testid="front"
+      >
+        ?
+      </div>
+    </button>
+    <button
+      class="sc-beySPh gYIAsZ"
+      data-testid="card-container"
+    >
+      <div
+        class="back"
+        data-testid="back"
+      >
+        ?
+      </div>
+      <div
+        class="front"
+        data-testid="front"
+      >
+        ?
+      </div>
+    </button>
+    <button
+      class="sc-beySPh gYIAsZ"
+      data-testid="card-container"
+    >
+      <div
+        class="back"
+        data-testid="back"
+      >
+        ?
+      </div>
+      <div
+        class="front"
+        data-testid="front"
+      >
+        ?
+      </div>
+    </button>
+    <button
+      class="sc-beySPh gYIAsZ"
+      data-testid="card-container"
+    >
+      <div
+        class="back"
+        data-testid="back"
+      >
+        ?
+      </div>
+      <div
+        class="front"
+        data-testid="front"
+      >
+        ?
+      </div>
+    </button>
+    <button
+      class="sc-beySPh gYIAsZ"
+      data-testid="card-container"
+    >
+      <div
+        class="back"
+        data-testid="back"
+      >
+        ?
+      </div>
+      <div
+        class="front"
+        data-testid="front"
+      >
+        ?
+      </div>
+    </button>
+    <button
+      class="sc-beySPh gYIAsZ"
+      data-testid="card-container"
+    >
+      <div
+        class="back"
+        data-testid="back"
+      >
+        ?
+      </div>
+      <div
+        class="front"
+        data-testid="front"
+      >
+        ?
+      </div>
+    </button>
+    <button
+      class="sc-beySPh gYIAsZ"
+      data-testid="card-container"
+    >
+      <div
+        class="back"
+        data-testid="back"
+      >
+        ?
+      </div>
+      <div
+        class="front"
+        data-testid="front"
+      >
+        ?
+      </div>
+    </button>
+    <button
+      class="sc-beySPh gYIAsZ"
+      data-testid="card-container"
+    >
+      <div
+        class="back"
+        data-testid="back"
+      >
+        ?
+      </div>
+      <div
+        class="front"
+        data-testid="front"
+      >
+        ?
+      </div>
+    </button>
+    <button
+      class="sc-beySPh gYIAsZ"
+      data-testid="card-container"
+    >
+      <div
+        class="back"
+        data-testid="back"
+      >
+        ?
+      </div>
+      <div
+        class="front"
+        data-testid="front"
+      >
+        ?
+      </div>
+    </button>
+    <button
+      class="sc-beySPh gYIAsZ"
+      data-testid="card-container"
+    >
+      <div
+        class="back"
+        data-testid="back"
+      >
+        ?
+      </div>
+      <div
+        class="front"
+        data-testid="front"
+      >
+        ?
+      </div>
+    </button>
+    <button
+      class="sc-beySPh gYIAsZ"
+      data-testid="card-container"
+    >
+      <div
+        class="back"
+        data-testid="back"
+      >
+        ?
+      </div>
+      <div
+        class="front"
+        data-testid="front"
+      >
+        ?
+      </div>
+    </button>
+    <button
+      class="sc-beySPh gYIAsZ"
+      data-testid="card-container"
+    >
+      <div
+        class="back"
+        data-testid="back"
+      >
+        ?
+      </div>
+      <div
+        class="front"
+        data-testid="front"
+      >
+        ?
+      </div>
+    </button>
+  </div>
+  <div
+    class="sc-hLQSwg bKgnDw"
+  >
+    <div
+      class="sc-eDLKkx kcLWBJ"
+    >
+      <h2>
+        Start a new game
+      </h2>
+      <fieldset>
+        <legend>
+          Configure how you want to play
+        </legend>
+        <form>
+          <label
+            for="category-select"
+          >
+            Category:
+          </label>
+          <select
+            id="category-select"
+            name="categories"
+            required=""
+          >
+            <option
+              value=""
+            >
+              --Please choose an category--
+            </option>
+            <option
+              value="activity_sports"
+            >
+              Activity and Sports ⚽️🤸‍♂️
+            </option>
+            <option
+              value="animals"
+            >
+              Animals & Nature 🐶 🐱
+            </option>
+            <option
+              value="clothing_accessories"
+            >
+              Clothing and Accessories 🧦🕶
+            </option>
+            <option
+              value="food_drink"
+            >
+              Food & Drink 🍕🍺
+            </option>
+            <option
+              value="gestures_body"
+            >
+              Gestures and Body Parts 👋🦶
+            </option>
+            <option
+              value="objects"
+            >
+              Objects 🔧💡
+            </option>
+            <option
+              value="people_fantasy"
+            >
+              People and Fantasy 👨🧛‍♂️
+            </option>
+            <option
+              value="smileys"
+            >
+              Smileys 😃😝
+            </option>
+            <option
+              value="symbols"
+            >
+              Flags 🇧🇷🇺🇸
+            </option>
+            <option
+              value="symbols"
+            >
+              Symbols 🆘🛂
+            </option>
+            <option
+              value="travel_places"
+            >
+              Travel & Places 🚙 🌆
+            </option>
+          </select>
+          <label
+            for="level-select"
+          >
+            Level:
+          </label>
+          <select
+            id="level-select"
+            name="levels"
+            required=""
+          >
+            <option
+              value=""
+            >
+              --Please choose an level--
+            </option>
+            <option
+              value="very_easy"
+            >
+              🤩 Very easy (5 emojis)
+            </option>
+            <option
+              value="easy"
+            >
+              🤗 Easy (8 emojis)
+            </option>
+            <option
+              value="normal"
+            >
+              🙂 Normal (10 emojis)
+            </option>
+            <option
+              value="hard"
+            >
+              😣 Hard (15 emojis)
+            </option>
+            <option
+              value="very_hard"
+            >
+              😨 Very hard (20 emojis)
+            </option>
+            <option
+              value="insane"
+            >
+              😱 Insane (all available)
+            </option>
+          </select>
+          <button
+            type="submit"
+          >
+            Start
+          </button>
+        </form>
+      </fieldset>
+    </div>
+  </div>
+</DocumentFragment>
+`;
