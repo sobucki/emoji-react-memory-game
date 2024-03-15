@@ -1,8 +1,10 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { duplicateUniqueList, shuffle } from "../../util/utils";
 import useTimer from "../use-timer";
 import { getSizeByLevel } from "./categories/utils";
 import { StartGameProps } from "./types";
+
+const CARD_FLIP_DELAY = 1000; //one seconds in milliseconds
 
 function useGame() {
   const [currentOptionCards, setCurrentOptionCards] = useState<string[]>([]);
@@ -17,11 +19,15 @@ function useGame() {
     status: "paused",
   });
 
-  const startGame = ({ level, optionsCards }: StartGameProps) => {
-    setCurrentOptionCards(optionsCards);
-    setLevel(level);
-    start();
-  };
+  const startGame = useCallback(
+    ({ level, optionsCards }: StartGameProps) => {
+      setCurrentOptionCards(optionsCards);
+      setLevel(level);
+      start();
+    },
+    [start]
+  );
+
   const [counterMatches, setCounterMatches] = useState(0);
   const [isVictory, setIsVictory] = useState(false);
 
@@ -53,7 +59,7 @@ function useGame() {
         setTimeout(() => {
           setMatchedCard(false);
           selectedCard.setMatchedCard(false);
-        }, 1000);
+        }, CARD_FLIP_DELAY);
         setMoves((current) => current + 1);
       }
       setSelectedCard(null);
