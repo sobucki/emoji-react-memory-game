@@ -1,6 +1,7 @@
 import { FormEvent } from "react";
 import { Content, Overlay } from "./styles";
 import { MenuProps } from "./types";
+import { selectCardsByCategory } from "../../../../hook/use-game/categories/utils";
 
 function Menu({ isOpen, onSubmit }: MenuProps) {
   if (!isOpen) {
@@ -12,7 +13,12 @@ function Menu({ isOpen, onSubmit }: MenuProps) {
     const form = event.target as HTMLFormElement;
     const category = form.elements.namedItem("categories") as HTMLSelectElement;
     const level = form.elements.namedItem("levels") as HTMLSelectElement;
-    onSubmit({ category: category.value, level: level.value });
+    const selectedCards = selectCardsByCategory(category.value);
+    onSubmit({
+      category: category.value,
+      level: level.value,
+      optionsCards: selectedCards,
+    });
   };
 
   return (
@@ -27,7 +33,7 @@ function Menu({ isOpen, onSubmit }: MenuProps) {
             <select name="categories" id="category-select" required>
               <option value="">--Please choose an category--</option>
               <option value="activity_sports">Activity and Sports ⚽️🤸‍♂️</option>
-              <option value="animals">Animals & Nature 🐶 🐱</option>
+              <option value="animals_nature">Animals & Nature 🐶 🐱</option>
               <option value="clothing_accessories">
                 Clothing and Accessories 🧦🕶
               </option>
@@ -38,7 +44,7 @@ function Menu({ isOpen, onSubmit }: MenuProps) {
               <option value="objects">Objects 🔧💡</option>
               <option value="people_fantasy">People and Fantasy 👨🧛‍♂️</option>
               <option value="smileys">Smileys 😃😝</option>
-              <option value="symbols">Flags 🇧🇷🇺🇸</option>
+              <option value="flags">Flags 🇧🇷🇺🇸</option>
               <option value="symbols">Symbols 🆘🛂</option>
               <option value="travel_places">Travel & Places 🚙 🌆</option>
             </select>
@@ -52,7 +58,7 @@ function Menu({ isOpen, onSubmit }: MenuProps) {
               <option value="normal">🙂 Normal (10 emojis)</option>
               <option value="hard">😣 Hard (15 emojis)</option>
               <option value="very_hard">😨 Very hard (20 emojis)</option>
-              <option value="insane">😱 Insane (all available)</option>
+              <option value="insane">😱 Insane (50 emojis)</option>
             </select>
 
             <button type="submit">Start</button>

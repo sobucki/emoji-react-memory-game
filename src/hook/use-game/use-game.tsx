@@ -1,10 +1,27 @@
 import { useEffect, useMemo, useState } from "react";
-import { useGameProps } from "./types";
 import { duplicateUniqueList, shuffle } from "../../util/utils";
 import useTimer from "../use-timer";
+import { getSizeByLevel } from "./categories/utils";
+import { StartGameProps } from "./types";
 
-function useGame({ optionCards }: useGameProps) {
-  const { formatted: formattedTimer, pause } = useTimer({ initialValue: 0 });
+function useGame() {
+  const [currentOptionCards, setCurrentOptionCards] = useState<string[]>([]);
+  const [currentLevel, setLevel] = useState<string>("normal");
+
+  const {
+    formatted: formattedTimer,
+    pause,
+    start,
+  } = useTimer({
+    initialValue: 0,
+    status: "paused",
+  });
+
+  const startGame = ({ level, optionsCards }: StartGameProps) => {
+    setCurrentOptionCards(optionsCards);
+    setLevel(level);
+    start();
+  };
   const [counterMatches, setCounterMatches] = useState(0);
   const [isVictory, setIsVictory] = useState(false);
 
@@ -16,9 +33,11 @@ function useGame({ optionCards }: useGameProps) {
   } | null>(null);
 
   const cards = useMemo(() => {
-    const duplicatedCards = duplicateUniqueList(optionCards.slice(0, 10));
+    const duplicatedCards = duplicateUniqueList(
+      shuffle(currentOptionCards).slice(0, getSizeByLevel(currentLevel))
+    );
     return shuffle(duplicatedCards);
-  }, [optionCards]);
+  }, [currentLevel, currentOptionCards]);
 
   const onRevealCard = (
     value: string,
@@ -44,13 +63,20 @@ function useGame({ optionCards }: useGameProps) {
   };
 
   useEffect(() => {
-    if (counterMatches === cards.length / 2) {
+    if (cards.length !== 0 && counterMatches === cards.length / 2) {
       setIsVictory(true);
       pause();
     }
   }, [counterMatches, cards, pause]);
 
-  return { cards, onRevealCard, moves, time: formattedTimer, win: isVictory };
+  return {
+    cards,
+    onRevealCard,
+    moves,
+    time: formattedTimer,
+    win: isVictory,
+    startGame,
+  };
 }
 
 export default useGame;

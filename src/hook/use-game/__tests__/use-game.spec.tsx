@@ -2,6 +2,7 @@ import { act, renderHook } from "@testing-library/react";
 import useGame from "..";
 
 const pauseMock = vi.fn();
+const startMock = vi.fn();
 
 vi.mock("../../use-timer", () => ({
   __esModule: true,
@@ -9,6 +10,7 @@ vi.mock("../../use-timer", () => ({
     seconds: 0,
     formatted: "00:00:00",
     pause: pauseMock,
+    start: startMock,
   })),
 }));
 
@@ -25,7 +27,14 @@ describe("use-game", () => {
 
   describe("cards", () => {
     it("should return a shuffled and duplicated cards", () => {
-      const { result } = renderHook(() => useGame({ optionCards: ["a", "b"] }));
+      const { result } = renderHook(() => useGame());
+      act(() => {
+        result.current.startGame({
+          optionsCards: ["a", "b"],
+          category: "not_category",
+          level: "easy",
+        });
+      });
 
       expect(result.current.cards.length).toEqual(4);
       expect(result.current.cards.filter((i) => i === "a").length).toEqual(2);
@@ -34,17 +43,16 @@ describe("use-game", () => {
   });
 
   describe("onReveal", () => {
-    beforeEach(() => {
-      // tell vitest we use mocked time
-      vi.useFakeTimers();
-    });
-
-    afterEach(() => {
-      // restoring date after each test run
-      vi.useRealTimers();
-    });
     it("should call callback with false when card not match", async () => {
-      const { result } = renderHook(() => useGame({ optionCards: ["a", "b"] }));
+      const { result } = renderHook(() => useGame());
+
+      act(() => {
+        result.current.startGame({
+          optionsCards: ["a", "b"],
+          category: "any",
+          level: "easy",
+        });
+      });
 
       const callback1 = vitest.fn();
       const callback2 = vitest.fn();
@@ -58,16 +66,21 @@ describe("use-game", () => {
       });
 
       await vi.runAllTimersAsync();
-      // await act(async () => {
-      // result.current.onRevealCard("a", callback1);
-      // });
 
       expect(callback1).toBeCalledWith(false);
       expect(callback2).toBeCalledWith(false);
     });
 
     it("should call callback with true when card match", () => {
-      const { result } = renderHook(() => useGame({ optionCards: ["a", "b"] }));
+      const { result } = renderHook(() => useGame());
+
+      act(() => {
+        result.current.startGame({
+          optionsCards: ["a", "b"],
+          category: "any",
+          level: "easy",
+        });
+      });
 
       const callback1 = vitest.fn();
       const callback2 = vitest.fn();
@@ -89,13 +102,29 @@ describe("use-game", () => {
 
   describe("counter moves", () => {
     it("should moves stars with zero", () => {
-      const { result } = renderHook(() => useGame({ optionCards: ["a", "b"] }));
+      const { result } = renderHook(() => useGame());
+
+      act(() => {
+        result.current.startGame({
+          optionsCards: ["a", "b"],
+          category: "any",
+          level: "easy",
+        });
+      });
 
       expect(result.current.moves).toEqual(0);
     });
 
     it("should incremente when reveal a matched pair of cards", () => {
-      const { result } = renderHook(() => useGame({ optionCards: ["a", "b"] }));
+      const { result } = renderHook(() => useGame());
+
+      act(() => {
+        result.current.startGame({
+          optionsCards: ["a", "b"],
+          category: "any",
+          level: "easy",
+        });
+      });
 
       act(() => {
         result.current.onRevealCard("a", vitest.fn());
@@ -111,7 +140,15 @@ describe("use-game", () => {
     });
 
     it("should incremente when reveal a different pair of cards", () => {
-      const { result } = renderHook(() => useGame({ optionCards: ["a", "b"] }));
+      const { result } = renderHook(() => useGame());
+
+      act(() => {
+        result.current.startGame({
+          optionsCards: ["a", "b"],
+          category: "any",
+          level: "easy",
+        });
+      });
 
       act(() => {
         result.current.onRevealCard("a", vitest.fn());
@@ -130,9 +167,15 @@ describe("use-game", () => {
   describe("Rules", () => {
     describe("Win game", () => {
       it("should set win false when not match all cards of table", () => {
-        const { result } = renderHook(() =>
-          useGame({ optionCards: ["a", "b"] })
-        );
+        const { result } = renderHook(() => useGame());
+
+        act(() => {
+          result.current.startGame({
+            optionsCards: ["a", "b"],
+            category: "any",
+            level: "easy",
+          });
+        });
 
         expect(result.current.win).toEqual(false);
 
@@ -150,9 +193,15 @@ describe("use-game", () => {
       });
 
       it("should set win true when match all cards of table", () => {
-        const { result } = renderHook(() =>
-          useGame({ optionCards: ["a", "b"] })
-        );
+        const { result } = renderHook(() => useGame());
+
+        act(() => {
+          result.current.startGame({
+            optionsCards: ["a", "b"],
+            category: "any",
+            level: "easy",
+          });
+        });
 
         expect(result.current.win).toEqual(false);
 
@@ -182,7 +231,15 @@ describe("use-game", () => {
       });
 
       it("should pause timer when win the game", () => {
-        const { result } = renderHook(() => useGame({ optionCards: ["a"] }));
+        const { result } = renderHook(() => useGame());
+
+        act(() => {
+          result.current.startGame({
+            optionsCards: ["a"],
+            category: "any",
+            level: "easy",
+          });
+        });
 
         expect(result.current.win).toEqual(false);
 

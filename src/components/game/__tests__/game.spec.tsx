@@ -26,7 +26,7 @@ describe("game", () => {
       const categorySelect = screen.getByRole("combobox", {
         name: /category:/i,
       });
-      fireEvent.change(categorySelect, { target: { value: "animals" } });
+      fireEvent.change(categorySelect, { target: { value: "animals_nature" } });
 
       const levelSelect = screen.getByRole("combobox", { name: /level:/i });
       fireEvent.change(levelSelect, { target: { value: "normal" } });

@@ -37,7 +37,7 @@ exports[`menu > Rendering > should render correctly 1`] = `
               Activity and Sports ⚽️🤸‍♂️
             </option>
             <option
-              value="animals"
+              value="animals_nature"
             >
               Animals & Nature 🐶 🐱
             </option>
@@ -72,7 +72,7 @@ exports[`menu > Rendering > should render correctly 1`] = `
               Smileys 😃😝
             </option>
             <option
-              value="symbols"
+              value="flags"
             >
               Flags 🇧🇷🇺🇸
             </option>
@@ -130,7 +130,7 @@ exports[`menu > Rendering > should render correctly 1`] = `
             <option
               value="insane"
             >
-              😱 Insane (all available)
+              😱 Insane (50 emojis)
             </option>
           </select>
           <button

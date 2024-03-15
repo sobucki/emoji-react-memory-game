@@ -1,6 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import Menu from "..";
 import { MenuProps } from "../types";
+import animals_nature from "../../../../../hook/use-game/categories/animals_nature.json";
 
 const defaultProps: MenuProps = { isOpen: true, onSubmit: vi.fn() };
 
@@ -57,7 +58,7 @@ describe("menu", () => {
             Activity and Sports ⚽️🤸‍♂️
           </option>
           <option
-            value="animals"
+            value="animals_nature"
           >
             Animals & Nature 🐶 🐱
           </option>
@@ -92,7 +93,7 @@ describe("menu", () => {
             Smileys 😃😝
           </option>
           <option
-            value="symbols"
+            value="flags"
           >
             Flags 🇧🇷🇺🇸
           </option>
@@ -150,7 +151,7 @@ describe("menu", () => {
           <option
             value="insane"
           >
-            😱 Insane (all available)
+            😱 Insane (50 emojis)
           </option>
         </select>
       `);
@@ -174,7 +175,7 @@ describe("menu", () => {
       const category = screen.getByRole("combobox", { name: /category:/i });
       expect(category).toBeInvalid();
 
-      fireEvent.change(category, { target: { value: "animals" } });
+      fireEvent.change(category, { target: { value: "animals_nature" } });
 
       expect(
         screen.getByRole("combobox", { name: /category:/i })
@@ -195,7 +196,7 @@ describe("menu", () => {
       const categorySelect = screen.getByRole("combobox", {
         name: /category:/i,
       });
-      fireEvent.change(categorySelect, { target: { value: "animals" } });
+      fireEvent.change(categorySelect, { target: { value: "animals_nature" } });
 
       const levelSelect = screen.getByRole("combobox", { name: /level:/i });
       fireEvent.change(levelSelect, { target: { value: "normal" } });
@@ -203,8 +204,9 @@ describe("menu", () => {
       fireEvent.click(screen.getByRole("button", { name: /start/i }));
 
       expect(defaultProps.onSubmit).toBeCalledWith({
-        category: "animals",
+        category: "animals_nature",
         level: "normal",
+        optionsCards: animals_nature,
       });
     });
   });

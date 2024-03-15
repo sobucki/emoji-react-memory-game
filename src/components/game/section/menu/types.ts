@@ -6,4 +6,5 @@ export type MenuProps = {
 export type FormType = {
   category: string;
   level: string;
+  optionsCards: string[];
 };

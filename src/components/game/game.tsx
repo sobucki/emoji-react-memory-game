@@ -1,18 +1,17 @@
 import Card from "./section/card";
 import { Header, Table } from "./styles";
-import emojis from "../../assets/faces.json";
 import useGame from "../../hook/use-game";
 import Menu from "./section/menu";
 import { FormType } from "./section/menu/types";
 import { useState } from "react";
 
 function Game() {
-  const { cards, onRevealCard, moves, time } = useGame({ optionCards: emojis });
+  const { cards, onRevealCard, moves, time, startGame } = useGame();
   const [isOpenMenu, setIsOpenMenu] = useState(true);
 
-  const onStartMenu = (values: FormType) => {
-    console.log(values);
+  const onStartMenu = ({ category, level, optionsCards }: FormType) => {
     setIsOpenMenu(false);
+    startGame({ category, level, optionsCards });
   };
 
   return (
