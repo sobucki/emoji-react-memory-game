@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import Menu from "..";
 import { MenuProps } from "../types";
-import animals_nature from "../../../../../hook/use-game/categories/animals_nature.json";
+import Menu from "..";
+import animals_nature from "../../../../../../hook/use-game/categories/animals_nature.json";
 
 const defaultProps: MenuProps = { isOpen: true, onSubmit: vi.fn() };
 

@@ -1,13 +1,15 @@
 import Card from "./section/card";
 import { Header, Table } from "./styles";
 import useGame from "../../hook/use-game";
-import Menu from "./section/menu";
-import { FormType } from "./section/menu/types";
+import Menu from "./section/menu/start-game";
+import { FormType } from "./section/menu/start-game/types";
 import { useState } from "react";
 import ConfettiEmoji from "../confetti-emoji";
+import FinishGameMenu from "./section/menu/finish-game";
 
 function Game() {
-  const { cards, onRevealCard, moves, time, startGame, win } = useGame();
+  const { cards, onRevealCard, moves, time, startGame, win, seconds } =
+    useGame();
   const [isOpenMenu, setIsOpenMenu] = useState(true);
 
   const onStartMenu = ({ category, level, optionsCards }: FormType) => {
@@ -28,7 +30,17 @@ function Game() {
         ))}
       </Table>
       <Menu isOpen={isOpenMenu} onSubmit={onStartMenu} />
-      {win && <ConfettiEmoji emojis={cards} />}
+      {win && (
+        <>
+          <FinishGameMenu
+            isOpen
+            moves={moves}
+            seconds={seconds}
+            onStart={() => null}
+          />
+          <ConfettiEmoji emojis={cards} />
+        </>
+      )}
     </>
   );
 }

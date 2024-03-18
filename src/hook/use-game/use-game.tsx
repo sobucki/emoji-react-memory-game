@@ -14,6 +14,7 @@ function useGame() {
     formatted: formattedTimer,
     pause,
     start,
+    seconds,
   } = useTimer({
     initialValue: 0,
     status: "paused",
@@ -82,6 +83,7 @@ function useGame() {
     time: formattedTimer,
     win: isVictory,
     startGame,
+    seconds,
   };
 }
 

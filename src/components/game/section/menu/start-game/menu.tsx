@@ -1,7 +1,7 @@
 import { FormEvent } from "react";
 import { Content, Overlay } from "./styles";
 import { MenuProps } from "./types";
-import { selectCardsByCategory } from "../../../../hook/use-game/categories/utils";
+import { selectCardsByCategory } from "../../../../../hook/use-game/categories/utils";
 
 function Menu({ isOpen, onSubmit }: MenuProps) {
   if (!isOpen) {
