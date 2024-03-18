@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { render, screen } from "@testing-library/react";
 import ConfettiEmoji from "..";
 
@@ -9,6 +10,7 @@ describe("confetti-emoji", () => {
     vi.mock("@tsparticles/react", () => {
       return {
         __esModule: true,
+        //@ts-expect-error
         default: ({ id }) => <div data-testid={id}></div>,
         initParticlesEngine: () => Promise.resolve(),
       };
