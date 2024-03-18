@@ -73,7 +73,7 @@ function useGame() {
       setIsVictory(true);
       pause();
     }
-  }, [counterMatches, cards, pause]);
+  }, [counterMatches, cards.length, pause]);
 
   return {
     cards,
