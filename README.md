@@ -2,6 +2,9 @@
 
 [![pages-build-deployment](https://github.com/sobucki/emoji-react-memory-game/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/sobucki/emoji-react-memory-game/actions/workflows/pages/pages-build-deployment)
 
+[![Play the Demo](https://img.shields.io/badge/Play-Demo-brightgreen)](https://sobucki.github.io/emoji-react-memory-game/)
+
+
 ## Introduction 🌟
 
 This project is a simple memory game built with React, where players flip cards to find matching pairs of emojis.
