@@ -11,9 +11,6 @@ exports[`game > rendering > should match snapshot 1`] = `
     <div>
       moves: 0
     </div>
-    <div>
-      time
-    </div>
   </section>
   <div
     class="sc-guDLey iHIfwE"
@@ -22,7 +19,7 @@ exports[`game > rendering > should match snapshot 1`] = `
     class="sc-hLQSwg bKgnDw"
   >
     <div
-      class="sc-eDLKkx kcLWBJ"
+      class="sc-eDLKkx hkJALD"
     >
       <h2>
         Start a new game

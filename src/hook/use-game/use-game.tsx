@@ -15,6 +15,7 @@ function useGame() {
     pause,
     start,
     seconds,
+    stop,
   } = useTimer({
     initialValue: 0,
     status: "paused",
@@ -76,6 +77,12 @@ function useGame() {
     }
   }, [counterMatches, cards.length, pause]);
 
+  const restart = useCallback(() => {
+    setMoves(0);
+    stop();
+    start();
+  }, [start, stop]);
+
   return {
     cards,
     onRevealCard,
@@ -84,6 +91,7 @@ function useGame() {
     win: isVictory,
     startGame,
     seconds,
+    restart,
   };
 }
 

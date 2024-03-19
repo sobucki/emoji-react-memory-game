@@ -33,7 +33,7 @@ describe("finish-menu", () => {
   it("should render time and moves correctly", () => {
     renderMenu({ ...defaultProps, moves: 10, seconds: 60 });
     expect(
-      screen.getByText(/you finished in 60 seconds and 10 moves/i)
+      screen.getByText(/you finished in 60 seconds with 10 moves/i)
     ).toBeInTheDocument();
   });
 

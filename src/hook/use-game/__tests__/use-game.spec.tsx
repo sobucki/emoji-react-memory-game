@@ -3,6 +3,7 @@ import useGame from "..";
 
 const pauseMock = vi.fn();
 const startMock = vi.fn();
+const stopMock = vi.fn();
 
 vi.mock("../../use-timer", () => ({
   __esModule: true,
@@ -11,6 +12,7 @@ vi.mock("../../use-timer", () => ({
     formatted: "00:00:00",
     pause: pauseMock,
     start: startMock,
+    stop: stopMock,
   })),
 }));
 
@@ -18,6 +20,7 @@ describe("use-game", () => {
   beforeEach(() => {
     // tell vitest we use mocked time
     vi.useFakeTimers();
+    vi.clearAllMocks();
   });
 
   afterEach(() => {
@@ -254,6 +257,101 @@ describe("use-game", () => {
         vi.runAllTimers();
 
         expect(pauseMock).toBeCalled();
+      });
+    });
+
+    describe("Restart game", () => {
+      it("should can restart game", () => {
+        const { result } = renderHook(() => useGame());
+
+        act(() => {
+          result.current.startGame({
+            optionsCards: ["a", "b"],
+            category: "any",
+            level: "easy",
+          });
+        });
+
+        expect(result.current.win).toEqual(false);
+
+        expect(result.current.moves).toEqual(0);
+
+        act(() => {
+          result.current.restart();
+        });
+        vi.runAllTimers();
+
+        expect(result.current.moves).toEqual(0);
+        expect(stopMock).toBeCalled();
+      });
+
+      it("should can restart game after move", () => {
+        const { result } = renderHook(() => useGame());
+
+        act(() => {
+          result.current.startGame({
+            optionsCards: ["a", "b"],
+            category: "any",
+            level: "easy",
+          });
+        });
+
+        expect(result.current.win).toEqual(false);
+
+        act(() => {
+          result.current.onRevealCard("a", vitest.fn());
+        });
+
+        act(() => {
+          result.current.onRevealCard("a", vitest.fn());
+        });
+
+        vi.runAllTimers();
+
+        expect(result.current.moves).toEqual(1);
+
+        act(() => {
+          result.current.restart();
+        });
+        vi.runAllTimers();
+
+        expect(result.current.moves).toEqual(0);
+        expect(stopMock).toBeCalled();
+      });
+
+      it("should can restart game and start again", () => {
+        const { result } = renderHook(() => useGame());
+
+        act(() => {
+          result.current.startGame({
+            optionsCards: ["a", "b"],
+            category: "any",
+            level: "easy",
+          });
+        });
+
+        expect(result.current.win).toEqual(false);
+
+        act(() => {
+          result.current.onRevealCard("a", vitest.fn());
+        });
+
+        act(() => {
+          result.current.onRevealCard("a", vitest.fn());
+        });
+
+        vi.runAllTimers();
+
+        expect(result.current.moves).toEqual(1);
+
+        act(() => {
+          result.current.restart();
+        });
+        vi.runAllTimers();
+
+        expect(result.current.moves).toEqual(0);
+        expect(stopMock).toBeCalled();
+        expect(startMock).toHaveBeenCalledTimes(2);
       });
     });
   });
