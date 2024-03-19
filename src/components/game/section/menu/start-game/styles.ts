@@ -18,7 +18,7 @@ export const Content = styled.div`
   padding: 16px;
   border-radius: 5px;
   position: relative;
-  min-width: 400px;
+  max-width: 400px;
 
   h2 {
     text-align: center;

@@ -11,7 +11,7 @@ function FinishGameMenu({ isOpen, moves, seconds, onStart }: MenuProps) {
       <Content onClick={(e) => e.stopPropagation()}>
         <h2>Congratulations!!</h2>
         <p>
-          You finished in {seconds} seconds and {moves} moves
+          You finished in {seconds} seconds with {moves} moves
         </p>
         <button onClick={onStart}>Play again</button>
       </Content>

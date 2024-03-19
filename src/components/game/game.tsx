@@ -22,7 +22,6 @@ function Game() {
       <Header>
         <div>time: {time}</div>
         <div>moves: {moves}</div>
-        <div>time</div>
       </Header>
       <Table>
         {cards.map((emoji, index) => (
