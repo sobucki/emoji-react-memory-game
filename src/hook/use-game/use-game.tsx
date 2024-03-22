@@ -1,8 +1,9 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { duplicateUniqueList, shuffle } from "../../util/utils";
 import useTimer from "../use-timer";
 import { getSizeByLevel } from "./categories/utils";
 import { StartGameProps } from "./types";
+import { CardInfo, CardStatus } from "../../components/game/section/card/types";
 
 const CARD_FLIP_DELAY = 1000; //one seconds in milliseconds
 
@@ -35,38 +36,61 @@ function useGame() {
 
   const [moves, setMoves] = useState(0);
 
-  const [selectedCard, setSelectedCard] = useState<{
-    value: string;
-    setMatchedCard: (value: boolean) => void;
-  } | null>(null);
+  const [selectedCard, setSelectedCard] = useState<CardInfo>();
 
-  const cards = useMemo(() => {
+  const [cards, setCards] = useState<CardInfo[]>([]);
+  useEffect(() => {
     const duplicatedCards = duplicateUniqueList(
       shuffle(currentOptionCards).slice(0, getSizeByLevel(currentLevel))
     );
-    return shuffle(duplicatedCards);
+
+    const shuffledCards = shuffle(duplicatedCards);
+    setCards(
+      shuffledCards.map<CardInfo>((item, index) => ({
+        id: index + "",
+        status: "hide",
+        value: item,
+      }))
+    );
   }, [currentLevel, currentOptionCards]);
 
-  const onRevealCard = (
-    value: string,
-    setMatchedCard: (value: boolean) => void
+  const updateCardsStatus = (
+    ids: string[],
+    status: CardStatus,
+    log: string
   ) => {
+    console.log(log);
+    setCards(
+      cards.map<CardInfo>((card) =>
+        ids.includes(card.id) ? { ...card, status } : card
+      )
+    );
+  };
+
+  const onRevealCard = (card: CardInfo) => {
+    updateCardsStatus([card.id], "flipped", card.value + "_fora");
     if (selectedCard) {
-      if (value === selectedCard.value) {
-        setMatchedCard(true);
-        selectedCard.setMatchedCard(true);
-        setMoves((current) => current + 1);
+      if (card.value === selectedCard.value && card.id !== selectedCard.id) {
+        updateCardsStatus(
+          [selectedCard.id, card.id],
+          "matched",
+          card.value + "_dentro_match"
+        );
         setCounterMatches((current) => current + 1);
       } else {
+        // updateCardsStatus([selectedCard.id, card.id], "flipped");
         setTimeout(() => {
-          setMatchedCard(false);
-          selectedCard.setMatchedCard(false);
+          updateCardsStatus(
+            [selectedCard.id, card.id],
+            "hide",
+            card.value + "_dentro_nao_match"
+          );
         }, CARD_FLIP_DELAY);
-        setMoves((current) => current + 1);
       }
-      setSelectedCard(null);
+      setMoves((current) => current + 1);
+      setSelectedCard(undefined);
     } else {
-      setSelectedCard({ value, setMatchedCard });
+      setSelectedCard(card);
     }
   };
 
@@ -82,6 +106,9 @@ function useGame() {
     stop();
     start();
   }, [start, stop]);
+
+  console.table(cards);
+  console.log(selectedCard);
 
   return {
     cards,

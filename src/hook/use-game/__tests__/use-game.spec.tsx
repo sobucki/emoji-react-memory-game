@@ -40,8 +40,12 @@ describe("use-game", () => {
       });
 
       expect(result.current.cards.length).toEqual(4);
-      expect(result.current.cards.filter((i) => i === "a").length).toEqual(2);
-      expect(result.current.cards.filter((i) => i === "b").length).toEqual(2);
+      expect(
+        result.current.cards.filter((i) => i.value === "a").length
+      ).toEqual(2);
+      expect(
+        result.current.cards.filter((i) => i.value === "b").length
+      ).toEqual(2);
     });
   });
 

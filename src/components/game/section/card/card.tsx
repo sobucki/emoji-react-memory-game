@@ -1,35 +1,23 @@
-import { useState } from "react";
 import { Container } from "./styles";
 import { CardProps } from "./types";
 
-function Card({ value, onClick: onTest }: CardProps) {
-  const [isActive, setIsActive] = useState(false);
-  const [isMatched, setIsMatched] = useState(false);
-
-  const setRevealed = (matched: boolean) => {
-    if (!matched) {
-      setIsActive(false);
-      return;
-    }
-    setIsMatched(true);
-  };
+function Card({ info, ...rest }: CardProps) {
+  const isActive = info.status === "flipped" || info.status === "matched";
+  const isMatched = info.status === "matched";
 
   return (
     <Container
+      {...rest}
       $active={isActive}
       $matched={isMatched}
-      onClick={() => {
-        setIsActive(!isActive);
-        onTest(value, setRevealed);
-      }}
-      disabled={isMatched || isActive}
+      disabled={isActive}
       data-testid="card-container"
     >
       <div className="back" data-testid="back">
         ?
       </div>
       <div className="front" data-testid="front">
-        {isActive ? value : "?"}
+        {isActive ? info.value : "?"}
       </div>
     </Container>
   );

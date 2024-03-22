@@ -1,4 +1,16 @@
-export type CardProps = {
+import { HTMLAttributes } from "react";
+
+export interface CardProps extends HTMLAttributes<HTMLButtonElement> {
+  info: CardInfo;
+  // onClick: (card: CardInfo, matchCard: (value: boolean) => void) => void;
+}
+
+export type CardData = Pick<CardInfo, "id" | "value">;
+
+export type CardInfo = {
+  id: string;
   value: string;
-  onClick: (value: string, matchCard: (value: boolean) => void) => void;
+  status: CardStatus;
 };
+
+export type CardStatus = "hide" | "flipped" | "matched";

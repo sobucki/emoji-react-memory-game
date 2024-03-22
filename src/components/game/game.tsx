@@ -24,8 +24,8 @@ function Game() {
         <div>moves: {moves}</div>
       </Header>
       <Table>
-        {cards.map((emoji, index) => (
-          <Card key={index} value={emoji} onClick={onRevealCard} />
+        {cards.map((card, index) => (
+          <Card key={index} info={card} onClick={() => onRevealCard(card)} />
         ))}
       </Table>
       <Menu isOpen={isOpenMenu} onSubmit={onStartMenu} />
@@ -37,7 +37,7 @@ function Game() {
             seconds={seconds}
             onStart={() => null}
           />
-          <ConfettiEmoji emojis={cards} />
+          <ConfettiEmoji emojis={cards.map((card) => card.value)} />
         </>
       )}
     </>
