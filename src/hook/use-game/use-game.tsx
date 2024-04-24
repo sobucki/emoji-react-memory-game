@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { duplicateUniqueList, shuffle } from "../../util/utils";
 import useTimer from "../use-timer";
 import { getSizeByLevel } from "./categories/utils";
@@ -9,6 +9,7 @@ const CARD_FLIP_DELAY = 1000; //one seconds in milliseconds
 function useGame() {
   const [currentOptionCards, setCurrentOptionCards] = useState<string[]>([]);
   const [currentLevel, setLevel] = useState<string>("normal");
+  const [cards, setCards] = useState<string[]>([]);
 
   const {
     formatted: formattedTimer,
@@ -23,12 +24,21 @@ function useGame() {
 
   const startGame = useCallback(
     ({ level, optionsCards }: StartGameProps) => {
+      start();
+      createCards(level, optionsCards);
       setCurrentOptionCards(optionsCards);
       setLevel(level);
-      start();
     },
     [start]
   );
+
+  const createCards = (level: string, optionCards: string[]) => {
+    const duplicatedCards = duplicateUniqueList(
+      shuffle(optionCards).slice(0, getSizeByLevel(level))
+    );
+    const shuffledCards = shuffle(duplicatedCards);
+    setCards(shuffledCards);
+  };
 
   const [counterMatches, setCounterMatches] = useState(0);
   const [isVictory, setIsVictory] = useState(false);
@@ -39,13 +49,6 @@ function useGame() {
     value: string;
     setMatchedCard: (value: boolean) => void;
   } | null>(null);
-
-  const cards = useMemo(() => {
-    const duplicatedCards = duplicateUniqueList(
-      shuffle(currentOptionCards).slice(0, getSizeByLevel(currentLevel))
-    );
-    return shuffle(duplicatedCards);
-  }, [currentLevel, currentOptionCards]);
 
   const onRevealCard = (
     value: string,
@@ -79,9 +82,10 @@ function useGame() {
 
   const restart = useCallback(() => {
     setMoves(0);
+    setCounterMatches(0);
+    setIsVictory(false);
     stop();
-    start();
-  }, [start, stop]);
+  }, [stop]);
 
   return {
     cards,
@@ -92,6 +96,8 @@ function useGame() {
     startGame,
     seconds,
     restart,
+    currentLevel,
+    currentOptionCards,
   };
 }
 

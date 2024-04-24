@@ -330,6 +330,8 @@ describe("use-game", () => {
           });
         });
 
+        expect(startMock).toBeCalledTimes(1);
+
         expect(result.current.win).toEqual(false);
 
         act(() => {
@@ -351,7 +353,7 @@ describe("use-game", () => {
 
         expect(result.current.moves).toEqual(0);
         expect(stopMock).toBeCalled();
-        expect(startMock).toHaveBeenCalledTimes(2);
+        expect(startMock).toBeCalledTimes(1);
       });
     });
   });

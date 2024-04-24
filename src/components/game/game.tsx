@@ -8,13 +8,18 @@ import ConfettiEmoji from "../confetti-emoji";
 import FinishGameMenu from "./section/menu/finish-game";
 
 function Game() {
-  const { cards, onRevealCard, moves, time, startGame, win, seconds } =
+  const { cards, onRevealCard, moves, time, startGame, win, seconds, restart } =
     useGame();
   const [isOpenMenu, setIsOpenMenu] = useState(true);
 
   const onStartMenu = ({ category, level, optionsCards }: FormType) => {
     setIsOpenMenu(false);
     startGame({ category, level, optionsCards });
+  };
+
+  const restartGame = () => {
+    restart();
+    setIsOpenMenu(true);
   };
 
   return (
@@ -25,7 +30,7 @@ function Game() {
       </Header>
       <Table>
         {cards.map((emoji, index) => (
-          <Card key={index} value={emoji} onClick={onRevealCard} />
+          <Card key={emoji + index} value={emoji} onClick={onRevealCard} />
         ))}
       </Table>
       <Menu isOpen={isOpenMenu} onSubmit={onStartMenu} />
@@ -35,7 +40,7 @@ function Game() {
             isOpen
             moves={moves}
             seconds={seconds}
-            onStart={() => null}
+            onStart={restartGame}
           />
           <ConfettiEmoji emojis={cards} />
         </>

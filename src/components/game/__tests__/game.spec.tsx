@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import Game from "..";
 
 const renderGame = () => {
@@ -34,6 +34,22 @@ describe("game", () => {
       fireEvent.click(screen.getByRole("button", { name: /start/i }));
 
       expect(screen.queryByText("Start a new game")).not.toBeInTheDocument();
+    });
+
+    it.only("should start a game with VERY EASY level", () => {
+      renderGame();
+
+      const categorySelect = screen.getByRole("combobox", {
+        name: /category:/i,
+      });
+      const categoryOptions = within(categorySelect).queryAllByRole("option");
+
+      const firstOption = categoryOptions.find(
+        (option) => (option as HTMLOptionElement).value
+      ).?;
+      console.log(firstOption.val);
+
+      // expect(categoryOptions).toEqual([]);
     });
   });
 });
