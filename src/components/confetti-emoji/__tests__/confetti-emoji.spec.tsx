@@ -15,7 +15,7 @@ describe("confetti-emoji", () => {
         initParticlesEngine: () => Promise.resolve(),
       };
     });
-    render(<ConfettiEmoji emojis={["🎉", "🎊"]} />);
+    render(<ConfettiEmoji emojis={["🎉", "🎊"]} initialized={true} />);
 
     const particlesElement = await screen.findByTestId("tsparticles");
     expect(particlesElement).toBeInTheDocument();
