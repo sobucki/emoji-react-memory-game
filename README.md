@@ -46,6 +46,8 @@ npm run dev
 - [X] Counter moves 🧮
 - [X] Game level selector 🔍
 - [X] Change category of emojis 😺
+- [ ] Load particles on startup 
+- [ ] Restart game
 - [ ] Ranking 🏆
 - [ ] Login with Google or another credentials 🔑
 
