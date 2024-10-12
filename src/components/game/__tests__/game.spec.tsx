@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import Game from "..";
 
 const renderGame = () => {
@@ -35,26 +35,5 @@ describe("game", () => {
 
       expect(screen.queryByText("Start a new game")).not.toBeInTheDocument();
     });
-
-    // it.only("should start a game with VERY EASY level", () => {
-    //   renderGame();
-
-    //   const categorySelect = screen.getByRole("combobox", {
-    //     name: /category:/i,
-    //   });
-    //   const categoryOptions = within(categorySelect).queryAllByRole("option");
-
-    //   const firstOption = categoryOptions.find(
-    //     (option) => (option as HTMLOptionElement).value !== undefined
-    //   ) as HTMLOptionElement | undefined;
-
-    //   if (firstOption) {
-    //     console.log(firstOption.value);
-    //   } else {
-    //     console.error("No valid option found");
-    //   }
-
-    //   // expect(categoryOptions).toEqual([]);
-    // });
   });
 });

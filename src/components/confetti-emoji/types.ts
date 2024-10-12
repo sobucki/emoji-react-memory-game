@@ -1,4 +1,4 @@
 export type ConfettiEmojiProps = {
   emojis: string[];
-  initialized: boolean;
+  display: boolean;
 };
