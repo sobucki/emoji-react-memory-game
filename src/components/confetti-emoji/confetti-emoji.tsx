@@ -1,9 +1,30 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Particles from "@tsparticles/react";
 import { type Container, type ISourceOptions } from "@tsparticles/engine";
 import { ConfettiEmojiProps } from "./types";
 
-const ConfettiEmoji = ({ emojis, initialized }: ConfettiEmojiProps) => {
+import type { Engine } from "tsparticles-engine";
+import type { Engine as EngineNew } from "@tsparticles/engine";
+import { loadSlim } from "@tsparticles/slim";
+import { loadCircleShape } from "tsparticles-shape-circle";
+import { loadSquareShape } from "tsparticles-shape-square";
+import { loadConfettiPreset } from "tsparticles-preset-confetti";
+import { initParticlesEngine } from "@tsparticles/react";
+
+const ConfettiEmoji = ({ emojis, display }: ConfettiEmojiProps) => {
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  useEffect(() => {
+    initParticlesEngine(async (engine) => {
+      await loadSlim(engine as unknown as EngineNew);
+      await loadCircleShape(engine as unknown as Engine);
+      await loadSquareShape(engine as unknown as Engine);
+      await loadConfettiPreset(engine as unknown as Engine);
+    }).then(() => {
+      setIsInitialized(true);
+    });
+  }, []);
+
   const particlesLoaded = async (container?: Container): Promise<void> => {
     console.log(container);
   };
@@ -121,10 +142,10 @@ const ConfettiEmoji = ({ emojis, initialized }: ConfettiEmojiProps) => {
 
       detectRetina: true,
     }),
-    []
+    [emojis]
   );
 
-  if (initialized) {
+  if (isInitialized && display) {
     return (
       <Particles
         id="tsparticles"
