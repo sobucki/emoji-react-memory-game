@@ -4,7 +4,6 @@
 
 [![Play the Demo](https://img.shields.io/badge/Play-Demo-brightgreen)](https://sobucki.github.io/emoji-react-memory-game/)
 
-
 ## Introduction 🌟
 
 This project is a simple memory game built with React, where players flip cards to find matching pairs of emojis.
@@ -15,22 +14,22 @@ To run the game locally:
 
 1. Clone the repository:
 
-```bash
-git clone https://github.com/sobucki/emoji-react-memory-game.git
-```
+    ```bash
+    git clone https://github.com/sobucki/emoji-react-memory-game.git
+    ```
 
 2. Install dependencies:
 
-```bash
-cd emoji-react-memory-game
-npm install
-```
+    ```bash
+    cd emoji-react-memory-game
+    npm install
+    ```
 
 3. Start the development server:
 
-```bash
-npm run dev
-```
+    ```bash
+    npm run dev
+    ```
 
 4. Open [http://localhost:5173/emoji-react-memory-game/]( http://localhost:5173/emoji-react-memory-game/) in your browser to play the game.
 
@@ -46,8 +45,8 @@ npm run dev
 - [X] Counter moves 🧮
 - [X] Game level selector 🔍
 - [X] Change category of emojis 😺
-- [ ] Load particles on startup 
-- [ ] Restart game
+- [X] Load particles on startup
+- [X] Restart game
 - [ ] Ranking 🏆
 - [ ] Login with Google or another credentials 🔑
 
